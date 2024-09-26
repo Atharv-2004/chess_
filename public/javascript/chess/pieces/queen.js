@@ -3,9 +3,71 @@ var Queen = function(config){
     this.constructor(config);
 };
 
-
-
 Queen.prototype = new Piece({});
-Queen.prototype.move = function(newPosition){
 
+Queen.prototype.isValid = function (targetPosition){
+    let currentCol = this.position.charAt(0);
+    let currentRow = parseInt(this.position.charAt(1));
+    let targetCol = targetPosition.col;
+    let targetRow = parseInt(targetPosition.row);
+    let targetPiece = this.board.getPieceAt(targetPosition);
+
+    if(targetCol.type === 'king'){
+        alert("You cannot kill the king");
+        return false;
+    }
+
+    // Check if the move is diagonal (like a Bishop)
+    if (Math.abs(targetCol.charCodeAt(0) - currentCol.charCodeAt(0)) === Math.abs(targetRow - currentRow)) {
+        let colStep = targetCol > currentCol ? 1 : -1;
+        let rowStep = targetRow > currentRow ? 1 : -1;
+        let col = currentCol.charCodeAt(0) + colStep;
+        let row = currentRow + rowStep;
+
+        while (String.fromCharCode(col) !== targetCol || row !== targetRow) {
+            if (this.board.getPieceAt({col: String.fromCharCode(col), row: row})) {
+                return false;
+            }
+            col += colStep;
+            row += rowStep;
+        }
+
+        if(targetPiece && targetPiece.color !== this.color){
+            targetPiece.kill(targetPiece);
+        }
+        return true;
+    }
+
+    // Check if the move is straight (like a Rook)
+    if (currentCol === targetCol || currentRow === targetRow) {
+        let colStep = currentCol === targetCol ? 0 : (targetCol > currentCol ? 1 : -1);
+        let rowStep = currentRow === targetRow ? 0 : (targetRow > currentRow ? 1 : -1);
+        let col = currentCol.charCodeAt(0) + colStep;
+        let row = currentRow + rowStep;
+
+        while (String.fromCharCode(col) !== targetCol || row !== targetRow) {
+            if (this.board.getPieceAt({col: String.fromCharCode(col), row: row})) {
+                return false;
+            }
+            col += colStep;
+            row += rowStep;
+        }
+
+        if(targetPiece && targetPiece.color !== this.color){
+            targetPiece.kill(targetPiece);
+        }
+        return true;
+    }
+
+    return false;
+}
+
+Queen.prototype.moveTo = function(newPosition){
+    if(this.isValid(newPosition)){
+        this.position = newPosition.col + newPosition.row;
+        this.render();
+        this.board.switchPlayer();
+    } else {
+        this.board.invalidMove();
+    }
 }
