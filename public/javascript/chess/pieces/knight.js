@@ -14,13 +14,23 @@ Knight.prototype.isValidPosition= function(targetPosition){
     let targetCol = targetPosition.col;
     let targetRow = parseInt(targetPosition.row);
 
+    let targetPiece = this.board.getPieceAt(targetPosition);
+
+
     // Check if the move is valid
     if (Math.abs(targetCol.charCodeAt(0) - currentCol.charCodeAt(0)) === 2 &&
-        Math.abs(targetRow - currentRow) === 1) {
-        return true;
+        Math.abs(targetRow - currentRow) === 1) 
+        {
+            if(targetPiece && targetPiece.color !== this.color){
+                targetPiece.kill(targetPiece);
+            }
+            return true;
     } else if (Math.abs(targetCol.charCodeAt(0) - currentCol.charCodeAt(0)) === 1 &&
                Math.abs(targetRow - currentRow) === 2) {
-        return true;
+                if(targetPiece && targetPiece.color !== this.color){
+                    targetPiece.kill(targetPiece);
+                }
+            return true;
     }
     return false; 
 };
@@ -31,9 +41,9 @@ Knight.prototype.moveTo = function(targetPosition){
     if(this.isValidPosition(targetPosition)){
         this.position = targetPosition.col + targetPosition.row;
         this.render();
+        this.board.switchPlayer();
     }else{
-        //NOOP
-        console.log("Invalid Move!!!");
+        this.board.invalidMove();
     }
 
 }
