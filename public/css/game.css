@@ -1,54 +1,60 @@
-.game-info {
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 15px;
-    background-color: #f0d9b5; /* Light background for the game info */
-    border: 2px solid #8b4513; /* Dark brown border */
-    border-radius: 5px;
+/* Style for the main container */
+body {
     font-family: Arial, sans-serif;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    margin: 0;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-#current-turn {
+h1 {
+    margin-bottom: 20px;
+    color: #994d00;
+}
+
+/* Style for the game-info box */
+#game-info {
+    background-color: #f4d7a0;
+    border: 1px solid #994d00;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    text-align: center;
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 15px;
-    text-align: center;
-    color: #514ecf; /* Default text color */
-    padding: 10px; /* Add padding for better spacing */
-    border-radius: 5px; /* Rounded corners */
 }
 
-#current-turn[data-player="White"] {
-    background-color: #ffffff; /* White background for white's turn */
-    color: #000000; /* Black text for contrast */
+/* Styling for the player turn */
+#current-turn {
+    color: #6b50a0;
+    font-size: 16px;
 }
 
-#current-turn[data-player="Black"] {
-    background-color: #000000; /* Black background for black's turn */
-    color: #ffffff; /* White text for contrast */
-}
-
-#invalid-move {
-    background-color: #ffcccc; /* Light red for invalid move */
-    color: #cc0000; /* Dark red text */
-    padding: 10px;
-    text-align: center;
-    font-weight: bold;
-    border-radius: 5px;
-    margin-top: 10px;
-}
-
-.hidden {
-    display: none;
-}
-
+/* Icons for current player */
 #current-turn[data-player="White"]::after {
-    content: "⚪"; /* White circle for white's turn */
+    content: "⚪"; 
     margin-left: 5px;
 }
 
 #current-turn[data-player="Black"]::after {
-    content: "⚫"; /* Black circle for black's turn */
+    content: "⚫"; 
     margin-left: 5px;
 }
+
+
+#invalid-move {
+    background-color: #ffcccc;
+    color: #cc0000; 
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+.hidden {
+    display: none;
+}
+
