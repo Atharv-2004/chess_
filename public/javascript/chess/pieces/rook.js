@@ -14,6 +14,11 @@ Rook.prototype.moveTo = function (newPosition) {
 
     let targetPiece = this.board.getPieceAt(newPosition);
 
+    if(targetPiece && targetPiece.type === "king") {
+        alert("You cant kill the king");
+        return;
+    }
+
     // Check if there's an opponent's piece and perform the 'kill' action
     if (targetPiece && targetPiece.color !== this.color) {
         targetPiece.kill(targetPiece);
