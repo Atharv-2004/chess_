@@ -1,0 +1,54 @@
+.game-info {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #f0d9b5; /* Light background for the game info */
+    border: 2px solid #8b4513; /* Dark brown border */
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+}
+
+#current-turn {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #514ecf; /* Default text color */
+    padding: 10px; /* Add padding for better spacing */
+    border-radius: 5px; /* Rounded corners */
+}
+
+#current-turn[data-player="White"] {
+    background-color: #ffffff; /* White background for white's turn */
+    color: #000000; /* Black text for contrast */
+}
+
+#current-turn[data-player="Black"] {
+    background-color: #000000; /* Black background for black's turn */
+    color: #ffffff; /* White text for contrast */
+}
+
+#invalid-move {
+    background-color: #ffcccc; /* Light red for invalid move */
+    color: #cc0000; /* Dark red text */
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+#current-turn[data-player="White"]::after {
+    content: "⚪"; /* White circle for white's turn */
+    margin-left: 5px;
+}
+
+#current-turn[data-player="Black"]::after {
+    content: "⚫"; /* Black circle for black's turn */
+    margin-left: 5px;
+}
